@@ -1,0 +1,42 @@
+plugins {
+    id 'nu.studer.plugindev' version '1.0.12'
+    id 'net.researchgate.release' version '2.8.1'
+}
+
+repositories {
+    jcenter()
+}
+
+group = 'com.infloop.gradle'
+version = '0.0.1.DEV'
+description 'Gradle plugin for Chocolatey to create, pack and push packages.'
+
+apply plugin: 'groovy'
+
+dependencies {
+    implementation 'commons-io:commons-io:2.5'
+    testImplementation 'xmlunit:xmlunit:1.6'
+    // Use the awesome Spock testing and specification framework
+    testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
+}
+
+bintray {
+    pkg.repo = 'gradle-plugins'
+    pkg.version.gpg.sign = true
+    pkg.userOrg = 'infloop'
+}
+
+plugindev {
+    pluginId 'com.infloop.gradle.chocolatey'
+    pluginName 'com.infloop.gradle:gradle-chocolatey-plugin'
+    pluginImplementationClass 'com.infloop.gradle.ChocolateyPlugin'
+    pluginDescription project.description
+    pluginLicenses 'Apache-2.0'
+    pluginTags 'gradle', 'plugin', 'chocolatey', 'c#', '.net'
+    authorId 'infloop'
+    authorName 'Kirill Minenko'
+    authorEmail 'infloop.gm@gmail.com'
+    projectUrl "https://github.com/infloop/${project.name}"
+    projectInceptionYear '2021'
+    done()
+}
